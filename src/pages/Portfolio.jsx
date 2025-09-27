@@ -1,5 +1,5 @@
 import profile_pic from "../images/profile_pic.jpg"
-import { Container, Row, Col, Card, Button, Modal, Form, Badge } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Modal, Form, Badge, Dropdown, DropdownButton } from "react-bootstrap";
 import {
   Mail,
   Phone,
@@ -80,16 +80,24 @@ export default function Portfolio() {
     <div className="min-h-screen bg-gradient-to-r from-slate-50 to-white">
 
       <header className="py-2 px-3 border-b z-50 bg-gradient-to-r from-slate-50 to-white fixed left-0 right-0">
-        <nav className="flex ms-auto w-25">
+        <nav className="flex justify-end">
 
           {["Home", "About", "Contact", "Blog"].map((value, key) => (
-            <Link className="border-2 font-bold hover:underline text-gray-600 rounded w-25 h-[40px] flex items-center justify-center mx-2 no-underline border-slate-200" key={key}>{value}</Link>
+            <Link className="hidden sm:block border-2 font-bold hover:underline text-gray-600 rounded px-4 py-1  flex items-center justify-center mx-2 no-underline border-slate-200" key={key}>{value}</Link>
           ))}
+
+          <Dropdown className="block sm:hidden">
+            <DropdownButton variant="outline-secondary" title="Menu" >
+              {["Home", "About", "Contact", "Blog"].map((value, key) => (
+                <Link className="border-2 my-2  font-bold hover:underline text-gray-600 rounded px-4 py-1  flex items-center justify-center mx-2 no-underline border-slate-200" key={key}>{value}</Link>
+              ))}
+            </DropdownButton>
+          </Dropdown>
         </nav>
       </header>
 
-
       <Container fluid className="py-8">
+
         {/* HERO */}
         <section className="bg-white shadow-md rounded-2xl p-6 mt-8 mb-8">
           <Row className="items-center gy-4">
@@ -104,7 +112,7 @@ export default function Portfolio() {
             </Col>
 
             <Col md={8} className="flex flex-col justify-center">
-              <h1 className="animate-bounce !text-[8vh] tracking-tight md:text-4xl font-extrabold">
+              <h1 className="!text-[8vh] tracking-tight md:text-4xl font-extrabold">
                 {profile.fullName}
               </h1>
               <p className="text-slate-600 mt-1 font-medium">{profile.title}</p>
@@ -144,7 +152,7 @@ export default function Portfolio() {
                 </a>
 
                 <a
-                  href="/enough_nthani_resume.pdf"
+                  href="#"
                   className="inline-flex items-center gap-2 text-sm font-medium"
                 >
                   <FileText size={18} /> Resume

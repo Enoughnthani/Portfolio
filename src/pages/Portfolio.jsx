@@ -149,10 +149,10 @@ export default function Portfolio() {
   ]
 
   const social_media = [
-    { icon: FaFacebook, link: "https://web.facebook.com/EnoughTonnyNthani" },
-    { icon: FaWhatsapp, link: "https://web.whatsapp.com/" },
-    { icon: FaLinkedin, link: "https://za.linkedin.com/" },
-    { icon: FaTwitter, link: "https://x.com/?lang=en" }
+    { icon: FaFacebook,hover_color:"hover:!text-blue-600 hover:bg-slate-100", link: "https://web.facebook.com/EnoughTonnyNthani" },
+    { icon: FaWhatsapp,hover_color:"hover:!text-green-600 hover:bg-slate-100", link: "https://wa.me/27637489367" },
+    { icon: FaLinkedin,hover_color:"hover:!text-sky-700 hover:bg-slate-100", link: "https://za.linkedin.com/" },
+    { icon: FaTwitter,hover_color:"hover:!text-slate-600 hover:bg-slate-100", link: "https://x.com/?lang=en" }
   ]
 
   const handleSubmit = (e) => {
@@ -216,7 +216,7 @@ export default function Portfolio() {
                 <div className="flex gap-3 rounded absolute -bottom-4 px-4 py-1 bg-slate-900">
                   {social_media.map(social => (
                     <a href={social.link} target="_blank">
-                      <social.icon size={35} className="hover:border rounded-md text-white cursor-pointer" />
+                      <social.icon size={35} className={`${social.hover_color} rounded-md text-white cursor-pointer`} />
                     </a>
                   ))}
                 </div>

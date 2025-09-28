@@ -3,6 +3,10 @@ import saps_img from "../images/saps_img.jpg"
 import danisile_glam_img from "../images/danisile_glam_img.png"
 import event_web_img from "../images/event-img.jpg"
 import student_card_web_img from "../images/student_card-web_img.png"
+import { motion } from "framer-motion";
+import laptop_repair_img from "../images/laptop_repair_img.jpg"
+import why_love_tech_img from "../images/why_love_tech_img.jpg"
+import assit_stud_img from "../images/assit_stud_img.jpg"
 
 import { Container, Row, Col, Card, Button, Modal, Form, Badge, Dropdown, DropdownButton, InputGroup } from "react-bootstrap";
 import {
@@ -13,23 +17,22 @@ import {
   Github,
   Linkedin,
   FileText,
-  Grid,
-  List,
   PhoneCall,
   ChevronRight,
-  ArrowBigRight,
   ArrowRight,
   ArrowUp
 } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaArrowRight, FaCalendarAlt, FaLaptopCode, FaTools, FaUserFriends } from "react-icons/fa"
 
 export default function Portfolio() {
   const [showContact, setShowContact] = useState(false);
   const openContact = () => setShowContact(true);
   const closeContact = () => setShowContact(false);
   const [validated, setValidated] = useState(false)
-  const [showScrollUpButton,setShowScrollUpButton] = useState(false) 
+  const [showScrollUpButton, setShowScrollUpButton] = useState(false)
+  const naviaget = useNavigate()
 
   const profile = {
     fullName: "Enough Tonny Nthani",
@@ -52,7 +55,7 @@ export default function Portfolio() {
   const projects = [
     {
       id: 1,
-      title: "SAPS Alert & Certify (School project)",
+      title: "SAPS Alert & Certify",
       desc:
         "Web app for online document certifying and crime reporting. React frontend, Node/Express API, PostgreSQL.",
       tech: ["React", "Node", "Postgres"],
@@ -61,7 +64,7 @@ export default function Portfolio() {
     },
     {
       id: 2,
-      title: "Danisile's Glam & Beauty Storefront",
+      title: "Danisile's Glam & Beauty",
       desc:
         "Small e-commerce site built with React Bootstrap and Flask backend to manage products and orders (no payments).",
       tech: ["React", "Flask", "Bootstrap"],
@@ -70,7 +73,7 @@ export default function Portfolio() {
     },
     {
       id: 3,
-      title: "Event Management System (Group)",
+      title: "Event Management System",
       desc: "System for storing and managing meetings, notes and activities. Java backend, React frontend.",
       tech: ["Java", "React", "MySQL"],
       link: "#",
@@ -78,7 +81,7 @@ export default function Portfolio() {
     },
     {
       id: 4,
-      title: "CardSwiftPro (Online Student Card Creation System)",
+      title: "CardSwiftPro",
       desc: "A web-based platform for creating student cards online, designed to eliminate long queues and streamline the process.",
       tech: ["Java", "HTML/CSS", "JavaScript", "Bootstrap", "MySQL"],
       link: "#",
@@ -87,9 +90,64 @@ export default function Portfolio() {
 
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+
+      if (window.scrollY > 300) {
+        setShowScrollUpButton(true)
+      } else {
+        setShowScrollUpButton(false)
+      }
+
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  },[])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+
+  const blogPosts = [
+    {
+      id: 1,
+      title: "Why I Love Building Web Apps",
+      date: "Sep 28, 2025",
+      excerpt:
+        "Thoughts on turning complex ideas into smooth, user-friendly interfaces with React and Tailwind.",
+      image: why_love_tech_img
+    },
+    {
+      id: 2,
+      title: "Laptop Repair Tips You Should Know",
+      date: "Sep 15, 2025",
+      excerpt:
+        "Simple steps to keep your laptop running longer and avoid common hardware problems.",
+      image: laptop_repair_img
+    },
+    {
+      id: 3,
+      title: "Helping Students Master Programming",
+      date: "Aug 30, 2025",
+      excerpt:
+        "How mentoring others has improved my own coding skills and kept me learning new concepts.",
+      image: assit_stud_img
+    },
+  ];
+
   const skillChips = [
     "Java", "React", "JavaScript", "HTML/CSS", "SQL", "Flask", "Python", "Git"
   ];
+
+  const navItems = [
+    { link: "/Portfolio/", label: "Home" },
+    { link: "#About_Me", label: "About" },
+    { link: "#Projects", label: "Projects" },
+    { link: "#Blog", label: "Blog" },
+  ]
 
   const handleSubmit = (e) => {
 
@@ -108,25 +166,28 @@ export default function Portfolio() {
 
       <header className="flex items-center py-2 px-3 border-b z-50 bg-gradient-to-r from-slate-50 to-white fixed left-0 right-0">
 
-        <div onClick={()=>location.href='/Portfolio'} className="flex items-center cursor-pointer">
-          <div className="flex items-center justify-center text-white font-bold bg-green-600 rounded-3xl w-[40px] h-[40px]">
+        <div onClick={() => location.href="/Portfolio/"} className="hover:border px-2 rounded flex items-center cursor-pointer">
+          <div className="flex items-center justify-center text-white font-bold bg-gray-600 rounded-3xl w-[40px] h-[40px]">
             ET
           </div>
-
           <div>
             <h4 className="m-0 ps-2 font-extrabold uppercase tracking-tight text-slate-900">Nthani</h4>
           </div>
         </div>
 
         <nav className="flex ms-auto items-center justify-end">
-          {["Home", "About", "Projects", "Blog"].map((value, key) => (
-            <Link className="hidden sm:block border-2 font-bold hover:underline text-gray-600 rounded px-4 py-1  flex items-center justify-center mx-2 no-underline border-slate-200" key={key}>{value}</Link>
+          {navItems.map((p, key) => (
+            <a as="a" href={p.link} className="hidden sm:block border-2 font-bold hover:underline text-gray-600 rounded px-4 py-1  flex items-center justify-center mx-2 no-underline border-slate-200" key={key}>
+              {p.label}
+            </a>
           ))}
 
           <Dropdown className="block sm:hidden">
             <DropdownButton variant="outline-secondary" title="Menu" >
-              {["Home", "About", "Projects", "Blog"].map((value, key) => (
-                <Link className="border-2 my-2  font-bold hover:underline text-gray-600 rounded px-4 py-1  flex items-center justify-center mx-2 no-underline border-slate-200" key={key}>{value}</Link>
+              {navItems.map((p, key) => (
+                <a as="a" href={p.link} className="border-2 my-2  font-bold hover:underline text-gray-600 rounded px-4 py-1  flex items-center justify-center mx-2 no-underline border-slate-200" key={key}>
+                  {p.label}
+                </a>
               ))}
             </DropdownButton>
           </Dropdown>
@@ -163,7 +224,7 @@ export default function Portfolio() {
                 {profile.heroTags.map((t) => (
                   <span
                     key={t}
-                    className="text-sm px-3 py-1 rounded-full border border-slate-200 text-slate-700"
+                    className="text-sm px-3  py-1 rounded-full bg-gray-600 border border-gray-600 text-white font-medium"
                   >
                     {t}
                   </span>
@@ -171,15 +232,22 @@ export default function Portfolio() {
               </div>
 
               <div className="mt-5 flex flex-wrap items-center gap-3">
-                <Button className="!flex items-center !font-bold" variant="primary" onClick={openContact}>
+                <motion.button
+                  onClick={openContact}
+                  className="!flex items-center !font-bold bg-gray-600 px-4 py-2 rounded !text-xl text-white"
+                  initial={{ scale: 0.8 }}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ type: "spring", stiffness: 150 }}
+                >
                   <Mail size={16} className="me-2" /> Contact
-                </Button>
+                </motion.button>
+
 
                 <a
                   href={profile.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium"
+                  className="inline-flex text-gray-600 items-center gap-2 text-sm font-medium"
                 >
                   <Github size={18} /> GitHub
                 </a>
@@ -188,14 +256,14 @@ export default function Portfolio() {
                   href={profile.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium"
+                  className="inline-flex text-gray-600 items-center gap-2 text-sm font-medium"
                 >
                   <Linkedin size={18} /> LinkedIn
                 </a>
 
                 <a
                   href="#"
-                  className="inline-flex items-center gap-2 text-sm font-medium"
+                  className="inline-flex text-gray-600 items-center gap-2 text-sm font-medium"
                 >
                   <FileText size={18} /> Resume
                 </a>
@@ -206,6 +274,56 @@ export default function Portfolio() {
               </div>
             </Col>
           </Row>
+        </section>
+
+        <section id="About_Me" className="relative bg-gradient-to-r from-slate-50 to-white py-20 px-6 flex justify-center">
+          <div className="absolute"></div>
+
+          <div className="relative max-w-5xl w-full text-center text-white space-y-10">
+            <h2 className="text-5xl text-slate-900 font-extrabold tracking-tight drop-shadow-md">
+              About Me
+            </h2>
+
+            <p className="text-lg text-slate-900 sm:text-xl leading-relaxed max-w-3xl mx-auto">
+              I’m <span className="font-semibold">Enough Tonny Nthani</span>, a
+              passionate developer who loves crafting clean, interactive web
+              experiences and exploring new technologies. My goal is to build tools
+              that make everyday life simpler and more enjoyable.
+            </p>
+
+            {/* Icon Feature Grid */}
+            <div className="grid md:grid-cols-3 gap-8 mt-12">
+              {/* Coding */}
+              <div className="bg-gray-600 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <FaLaptopCode className="text-5xl mx-auto mb-4 text-yellow-300 drop-shadow" />
+                <h3 className="text-2xl font-semibold mb-2">Web Development</h3>
+                <p className="text-base">
+                  Creating responsive, user-friendly websites and apps with React,
+                  Tailwind and modern backend stacks.
+                </p>
+              </div>
+
+              {/* Hardware Repair */}
+              <div className="bg-gray-600 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <FaTools className="text-5xl mx-auto mb-4 text-green-300 drop-shadow" />
+                <h3 className="text-2xl font-semibold mb-2">Hardware Solutions</h3>
+                <p className="text-base">
+                  Fixing and upgrading laptops & desktops, diagnosing hardware
+                  issues, and keeping systems running smoothly.
+                </p>
+              </div>
+
+              {/* Mentoring */}
+              <div className="bg-gray-600 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <FaUserFriends className="text-5xl mx-auto mb-4 text-pink-300 drop-shadow" />
+                <h3 className="text-2xl font-semibold mb-2">Programming Support</h3>
+                <p className="text-base">
+                  Helping students understand programming concepts and guiding them
+                  through projects and challenges.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="bg-gradient-to-r from-slate-50 to-white rounded-2xl p-6 mb-8">
@@ -262,7 +380,7 @@ export default function Portfolio() {
         </section>
 
 
-        <section className="bg-gradient-to-l from-slate-50 to-white space-y-6 py-6">
+        <section id="Projects" className="bg-gradient-to-l from-slate-50 to-white space-y-6 py-6">
           <div className="mb-3 px-3">
 
             <div className="max-w-2xl mx-auto text-center px-4 py-8">
@@ -275,105 +393,195 @@ export default function Portfolio() {
             </div>
           </div>
 
-          <Row className="g-3 py-4 space-y-6 px-3 align-items-stretch">
+
+          <div className="grid md:grid-cols-4 gap-8">
             {projects.map((p) => (
-              <Col sm={6} md={3} key={p.id}>
-                <Card className="h-100 mx-auto w-[18rem] cursor-pointer !border-slate-100 shadow-md flex flex-column">
+              <div className="flex flex-column items-center justify-center">
 
-                  <Card.Img className="h-50" src={p.image} />
-                  <Card.Body className="flex flex-col space-y-6 flex-grow">
-                    <h6>{p.title}</h6>
-                    <p className="text-slate-600 mt-3 flex-grow">{p.desc}</p>
-                  </Card.Body>
+                <img src={p.image} className="w-full h-48 object-cover" />
 
-                  <Card.Footer>
-                    <div className="flex flex-wrap">
-                      {p.tech.map((v, key) => (
-                        <Badge bg="secondary" className="p-2 m-2" key={key}>{v}</Badge>
-                      ))}
-                    </div>
-                  </Card.Footer>
-                </Card>
-              </Col>
+                <div
+                  className="flex flex-column flex-1 relative p-6 text-left space-y-4 bg-white rounded-b-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                >
+                  <h4 className="text-gray-600 tracking-tight font-extrabold">{p.title}</h4>
+                  <p className="text-gray-600">{p.desc}</p>
+
+                  <div className="mt-auto pt-3">
+                    <Button variant="outline-secondary">
+                      View Sorce Code
+                    </Button>
+                  </div>
+                </div>
+              </div>
             ))}
-          </Row>
+          </div>
+
 
           <div>
             <Button className="!flex bg-white mx-auto text-black !font-bold !border-gray-600">
               More Projects
-              <ArrowRight className="ms-2" />
+              <ArrowRight className="ms-2 hover:animate-arrow_rotate" />
             </Button>
           </div>
         </section>
 
-        <section className="border rounded my-4 ">
-          <Row className="h-100">
-            {/* Left Column */}
-            <Col md={5} className="flex items-center justify-center ps-4">
-              <div className="bg-purple-900 flex flex-col justify-center items-center rounded text-white h-[90%] px-6 py-4">
-                <div className="w-full space-y-5">
-                  <h4 className="font-bold text-xl">Contact Information</h4>
-                  <p className="font-semibold text-sm text-center">
-                    Do you have a project in mind that you think I would be a good fit for? Get in touch with me!
-                  </p>
+        <section
+          id="Blog"
+          className="relative bg-gray-50 py-20 px-6 flex justify-center"
+        >
+          <div className="max-w-6xl w-full text-center space-y-12">
+            <h2 className="text-5xl font-extrabold text-gray-800 tracking-tight">
+              Blog
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Insights, tips, and stories from my journey in software development,
+              hardware repair, and mentoring.
+            </p>
 
-                  <div className="flex items-center gap-2">
-                    <PhoneCall />
-                    <span>+2763 748 9367</span>
+            {/* Grid of posts */}
+            <div className="grid md:grid-cols-3 gap-8">
+              {blogPosts.map((post) => (
+                <article
+                  key={post.id}
+                  className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                >
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6 text-left space-y-4">
+                    <div className="flex items-center text-sm text-gray-500 space-x-2">
+                      <FaCalendarAlt className="text-indigo-500" />
+                      <span>{post.date}</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600">{post.excerpt}</p>
+                    <a
+                      href="#"
+                      className="inline-flex items-center text-indigo-600 font-semibold hover:underline mt-2"
+                    >
+                      Read More
+                      <FaArrowRight className="ml-2" />
+                    </a>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Mail />
-                    <span>enoughnthani@gmail.com</span>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="my-8 rounded-md border border-gray-200 overflow-hidden">
+          <Row className="h-full">
+            {/* Left Column */}
+            <Col
+              md={5}
+              className="flex items-center justify-center bg-gradient-to-b from-purple-800 to-purple-900 p-6 text-white"
+            >
+              <div className="space-y-6 text-center">
+                <h4 className="text-2xl font-bold tracking-wide">Contact Information</h4>
+                <p className="text-sm font-medium opacity-90">
+                  Do you have a project in mind that you think I would be a good fit for?
+                  Let’s talk!
+                </p>
+
+                <div className="mt-6 space-y-3">
+                  <div className="flex items-center justify-center gap-3">
+                    <PhoneCall className="h-5 w-5" />
+                    <span className="text-base">+27 63 748 9367</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-3">
+                    <Mail className="h-5 w-5" />
+                    <span className="text-base">enoughnthani@gmail.com</span>
                   </div>
                 </div>
               </div>
             </Col>
 
-            {/* Right Column (Form) */}
-            <Col md={7} className="flex items-center justify-center pb-3">
-              <div className="w-full h-[90%] rounded p-6 bg-white">
-                <Form noValidate validated={validated} onSubmit={handleSubmit} className="space-y-6">
-                  <Row className="gap-y-4">
-                    <Col md={6} className="flex items-center gap-x-2">
-                      <Form.Label className="w-[25%] md:!w-[50%] text-gray-600 font-semibold">First Name :</Form.Label>
-                      <Form.Control required />
-                    </Col>
+            {/* Right Column – Form */}
+            <Col md={7} className="flex items-center justify-center bg-white p-8">
+              <div className="w-full max-w-xl">
+                <Form
+                  noValidate
+                  validated={validated}
+                  onSubmit={handleSubmit}
+                  className="space-y-6"
+                >
 
-                    <Col md={6} className="flex items-center gap-x-2">
-                      <Form.Label className="w-[25%] md:!w-[50%] text-gray-600 font-semibold">Last Name :</Form.Label>
-                      <Form.Control required />
-                    </Col>
-                  </Row>
+                  <div className="grid grid-cols-2 gap-3">
 
-                  <Row className="gap-y-4">
-                    <Col className="flex items-center gap-x-2">
-                      <Form.Label className="w-25 text-gray-600 font-semibold">Email Address :</Form.Label>
-                      <InputGroup>
-                        <Form.Control required type="email" />
-                        <InputGroup.Text><Mail /></InputGroup.Text>
-                      </InputGroup>
+                    <Form.Label className="min-w-[100px] text-gray-700 font-semibold">
+                      First Name
+                    </Form.Label>
+                    <Form.Control required className="rounded-md border-gray-300" />
+
+                    <Form.Label className="min-w-[100px] text-gray-700 font-semibold">
+                      Last Name
+                    </Form.Label>
+                    <Form.Control required className="rounded-md border-gray-300" />
+
+                    <Form.Label className="min-w-[120px] text-gray-700 font-semibold">
+                      Email
+                    </Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        required
+                        type="email"
+                        className="rounded-l-md border-gray-300"
+                      />
+                      <InputGroup.Text className="bg-white">
+                        <Mail className="h-4 w-4 text-gray-600" />
+                      </InputGroup.Text>
+                    </InputGroup>
+                  </div>
+
+                  <Row>
+                    <Col>
+                      <Form.Label className="font-semibold text-gray-700">
+                        What are you interested in?
+                      </Form.Label>
+                      <div className="flex flex-wrap gap-4 mt-2">
+                        {["Mobile App", "Design", "Desktop App", "Software App"].map(
+                          (value, idx) => (
+                            <Form.Check
+                              key={idx}
+                              required
+                              id={idx + 1}
+                              name="interest"
+                              type="radio"
+                              label={value}
+                              className="text-gray-700 cursor-pointer"
+                            />
+                          )
+                        )}
+                      </div>
                     </Col>
                   </Row>
 
                   <Row>
                     <Col>
-                      <Form.Label className="font-semibold text-slate-600">What are you interested in?</Form.Label>
-                      {["Mobile App", "Design", "Desktop App", "Software App"].map((value, key) => (
-                        <Form.Check required name="interest" className="text-slate-600" type="radio" label={value} key={key} />
-                      ))}
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col>
-                      <Form.Label className="font-semibold text-slate-600">Your message</Form.Label>
-                      <Form.Control required as="textarea" />
+                      <Form.Label className="font-semibold text-gray-700">
+                        Your Message
+                      </Form.Label>
+                      <Form.Control
+                        required
+                        as="textarea"
+                        rows={4}
+                        className="rounded-md border-gray-300"
+                      />
                     </Col>
                   </Row>
 
                   <div className="flex justify-end">
-                    <Button type="submit" variant="success" className="!flex items-center">Send Message
-                      <ChevronRight className="ms-auto" />
+                    <Button
+                      type="submit"
+                      variant="success"
+                      className="!flex items-center gap-2 px-6 py-2 text-white rounded-md shadow-sm hover:shadow-md transition"
+                    >
+                      Send Message
+                      <ChevronRight className="h-4 w-4" />
                     </Button>
                   </div>
                 </Form>
@@ -383,10 +591,11 @@ export default function Portfolio() {
         </section>
 
 
+
       </Container>
 
-      {showScrollUpButton&&(
-        <ArrowUp className="fixed right-5 bottom-2 text-gray-600 border-1 !border-slate-300 rounded cursor-pointer" size={40}/>
+      {showScrollUpButton && (
+        <ArrowUp onClick={scrollToTop} className="fixed right-5 bottom-2 text-gray-600 border-1 !border-slate-300 rounded cursor-pointer" size={40} />
       )}
 
       {/* FOOTER */}

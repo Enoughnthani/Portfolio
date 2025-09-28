@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaArrowRight, FaCalendarAlt, FaLaptopCode, FaTools, FaUserFriends } from "react-icons/fa"
+import { FaArrowRight, FaCalendarAlt, FaFacebook, FaLaptopCode, FaLinkedin, FaTools, FaTwitter, FaUserFriends, FaWhatsapp } from "react-icons/fa"
 
 export default function Portfolio() {
   const [showContact, setShowContact] = useState(false);
@@ -148,6 +148,13 @@ export default function Portfolio() {
     { link: "#Blog", label: "Blog" },
   ]
 
+  const social_media = [
+    { icon: FaFacebook, link: "https://web.facebook.com/EnoughTonnyNthani" },
+    { icon: FaWhatsapp, link: "https://web.whatsapp.com/" },
+    { icon: FaLinkedin, link: "https://za.linkedin.com/" },
+    { icon: FaTwitter, link: "https://x.com/?lang=en" }
+  ]
+
   const handleSubmit = (e) => {
 
     e.preventDefault()
@@ -199,18 +206,26 @@ export default function Portfolio() {
         <section className="from-slate-50 to-white rounded p-6 mt-8 mb-8 bg-gradient-to-r">
           <Row className="animate-popup items-center space-y-9 py-9 gy-8">
             <Col md={5} className="text-center md:text-left">
-              <div className=" flex items-center justify-center">
+              <div className="flex relative items-center justify-center">
                 <img
                   src={profile_pic}
                   alt="profile"
-                  className="object-contain shadow-md bg-gradient-to-r from-slate-100 to-white rounded"
+                  className="object-contain  shadow-md bg-gradient-to-r from-slate-100 to-white rounded"
                 />
+
+                <div className="flex gap-3 rounded absolute -bottom-4 px-4 py-1 bg-slate-900">
+                  {social_media.map(social => (
+                    <a href={social.link} target="_blank">
+                      <social.icon size={35} className="hover:border rounded-md text-white cursor-pointer" />
+                    </a>
+                  ))}
+                </div>
               </div>
             </Col>
 
             <Col md={7} className="flex flex-col justify-center">
               <div className="flex flex-column items-center md:items-start">
-                <h1 className="tracking-tight !text-6xl lg:!text-7xl font-extrabold">
+                <h1 className="tracking-tight text-center !text-6xl lg:!text-7xl font-extrabold">
                   {profile.fullName}
                 </h1>
 
@@ -394,7 +409,7 @@ export default function Portfolio() {
 
 
           <div className="grid md:grid-cols-4 gap-8">
-            {projects.map((p,i) => (
+            {projects.map((p, i) => (
               <div key={i} className="flex flex-column items-center justify-center">
 
                 <img src={p.image} className="w-full h-48 object-cover" />

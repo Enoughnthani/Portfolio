@@ -104,12 +104,11 @@ export default function Portfolio() {
     window.addEventListener("scroll", handleScroll)
 
     return () => window.removeEventListener("scroll", handleScroll)
-  },[])
+  }, [])
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
 
   const blogPosts = [
     {
@@ -166,7 +165,7 @@ export default function Portfolio() {
 
       <header className="flex items-center py-2 px-3 border-b z-50 bg-gradient-to-r from-slate-50 to-white fixed left-0 right-0">
 
-        <div onClick={() => location.href="/Portfolio/"} className="hover:border px-2 rounded flex items-center cursor-pointer">
+        <div onClick={() => location.href = "/Portfolio/"} className="hover:border px-2 rounded flex items-center cursor-pointer">
           <div className="flex items-center justify-center text-white font-bold bg-gray-600 rounded-3xl w-[40px] h-[40px]">
             ET
           </div>
@@ -198,8 +197,8 @@ export default function Portfolio() {
 
         {/* HERO */}
         <section className="from-slate-50 to-white rounded p-6 mt-8 mb-8 bg-gradient-to-r">
-          <Row className="animate-popup items-center gy-4">
-            <Col md={6} className="text-center md:text-left">
+          <Row className="animate-popup items-center space-y-9 py-9 gy-8">
+            <Col md={5} className="text-center md:text-left">
               <div className=" flex items-center justify-center">
                 <img
                   src={profile_pic}
@@ -209,9 +208,9 @@ export default function Portfolio() {
               </div>
             </Col>
 
-            <Col md={6} className="flex flex-col justify-center">
+            <Col md={7} className="flex flex-col justify-center">
               <div className="flex flex-column items-center md:items-start">
-                <h1 className="!text-[8vh] tracking-tight md:text-4xl font-extrabold">
+                <h1 className="tracking-tight !text-6xl lg:!text-7xl font-extrabold">
                   {profile.fullName}
                 </h1>
 
@@ -276,7 +275,7 @@ export default function Portfolio() {
           </Row>
         </section>
 
-        <section id="About_Me" className="relative bg-gradient-to-r from-slate-50 to-white py-20 px-6 flex justify-center">
+        <section id="About_Me" className="fadeSection relative bg-gradient-to-r from-slate-50 to-white py-20 px-6 flex justify-center">
           <div className="absolute"></div>
 
           <div className="relative max-w-5xl w-full text-center text-white space-y-10">
@@ -333,7 +332,7 @@ export default function Portfolio() {
               <div className="flex-1">
                 <div className="flex gap-x-2">
                   <GraduationCap size={24} className="text-indigo-500 mt-1" />
-                  <h5 className="mb-3 text-3xl font-extrabold text-slate-800">Education</h5>
+                  <h5 className="mb-3 text-5xl font-extrabold text-slate-800">Education</h5>
                 </div>
 
                 <div className="grid grid-cols-2 gap-x-6 gap-y-3">
@@ -395,8 +394,8 @@ export default function Portfolio() {
 
 
           <div className="grid md:grid-cols-4 gap-8">
-            {projects.map((p) => (
-              <div className="flex flex-column items-center justify-center">
+            {projects.map((p,i) => (
+              <div key={i} className="flex flex-column items-center justify-center">
 
                 <img src={p.image} className="w-full h-48 object-cover" />
 

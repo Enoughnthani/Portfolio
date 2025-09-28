@@ -108,7 +108,7 @@ export default function Portfolio() {
 
       <header className="flex items-center py-2 px-3 border-b z-50 bg-gradient-to-r from-slate-50 to-white fixed left-0 right-0">
 
-        <div onClick={()=>location.href='/'} className="flex items-center cursor-pointer">
+        <div onClick={()=>location.href='/Portfolio'} className="flex items-center cursor-pointer">
           <div className="flex items-center justify-center text-white font-bold bg-green-600 rounded-3xl w-[40px] h-[40px]">
             ET
           </div>

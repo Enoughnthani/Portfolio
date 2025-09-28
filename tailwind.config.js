@@ -1,4 +1,3 @@
-const { transform } = require('framer-motion');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,15 +8,12 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        bounce:'bounce 2s ease-in-out forwards'
+        popup:'popup 1.5s ease-in-out'
       },
       keyframes: {
-        bounce:{
-          '0%':{transform:'translateY(-40px)'},
-          '25%':{transform:'translateY(20px)'},
-          '50%':{transform:'translateY(-20px)'},
-          '75%':{transform:'translateY(10px)'},
-          '100%':{transform:"translateY(0px)"}
+        popup:{
+          '0%':{opacity:'0'},
+          '100%':{opacity:'1'},
         }
       },
     },

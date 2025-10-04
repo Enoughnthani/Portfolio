@@ -276,7 +276,8 @@ export default function Portfolio() {
                 </a>
 
                 <a
-                  href="#"
+                  href="https://enoughnthani.github.io/Portfolio/enough_nthani_resume.pdf"
+                  download
                   className="inline-flex text-gray-600 items-center gap-2 text-sm font-medium"
                 >
                   <FileText size={18} /> Resume

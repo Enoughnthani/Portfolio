@@ -1,0 +1,278 @@
+1. Software Development Bootcamp
+
+Learn full-stack development using modern technologies like Java, React, and Spring Boot.
+
+Key Features:
+
+Hands-on coding projects
+Real-world application building
+Git & version control
+
+Benefits:
+
+Industry-ready skills
+Portfolio development
+Job readiness
+
+Schedule:
+
+Duration: 12 weeks
+Days: Mon–Fri
+Time: 09:00 – 15:00
+
+Learn More:
+
+https://example.com/software-bootcamp
+
+
+2. Data Science Fundamentals
+
+
+Master data analysis, visualization, and machine learning basics.
+
+Key Features:
+
+Python for data analysis
+Data visualization tools
+Intro to AI
+
+Benefits:
+
+High-demand skillset
+Data-driven decision making
+Career growth
+
+Schedule:
+
+Duration: 10 weeks
+Days: Tue–Thu
+Time: 10:00 – 14:00
+
+Learn More:
+
+https://example.com/data-science
+
+3. Cybersecurity Essentials
+
+
+Understand security principles and protect systems from cyber threats.
+
+Key Features:
+
+Network security
+Ethical hacking basics
+Risk assessment
+
+Benefits:
+
+Protect digital assets
+востреб industry
+Certification preparation
+
+Schedule:
+
+Duration: 8 weeks
+Days: Mon, Wed, Fri
+Time: 13:00 – 17:00
+
+Learn More:
+
+https://example.com/cybersecurity
+
+
+4. Cloud Computing with Azure
+
+
+Learn cloud infrastructure and services using Microsoft Azure.
+
+Key Features:
+
+Virtual machines
+Cloud storage
+Deployment strategies
+
+Benefits:
+
+Cloud certification readiness
+Scalable system skills
+High salary opportunities
+
+Schedule:
+
+Duration: 6 weeks
+Days: Mon–Thu
+Time: 09:00 – 13:00
+
+Learn More:
+
+https://example.com/azure
+
+
+
+
+5. Mobile App Development
+
+
+Build Android and cross-platform mobile applications.
+
+Key Features:
+
+React Native
+UI/UX design
+API integration
+
+Benefits:
+
+Build real apps
+Freelancing opportunities
+Startup readiness
+
+Schedule:
+
+Duration: 10 weeks
+Days: Mon–Fri
+Time: 11:00 – 16:00
+
+Learn More:
+
+https://example.com/mobile-dev
+
+
+6. Web Design & UX
+
+
+Create modern, responsive, and user-friendly web designs.
+
+Key Features:
+
+Figma design tools
+Responsive layouts
+UX principles
+
+Benefits:
+
+Creative skills
+Portfolio projects
+Freelance opportunities
+
+Schedule:
+
+Duration: 7 weeks
+Days: Tue–Fri
+Time: 10:00 – 14:00
+
+Learn More:
+
+https://example.com/web-design
+
+
+7. Artificial Intelligence Basics
+
+
+Explore AI concepts and build intelligent applications.
+
+Key Features:
+
+Machine learning intro
+Neural networks basics
+AI tools
+
+Benefits:
+
+Future-proof skills
+Innovation mindset
+Tech career boost
+
+Schedule:
+
+Duration: 9 weeks
+Days: Mon–Wed
+Time: 12:00 – 16:00
+
+Learn More:
+
+https://example.com/ai
+
+
+8. Database Management Systems
+
+
+Learn how to design, manage, and optimize databases.
+
+Key Features:
+
+SQL & NoSQL
+Database design
+Query optimization
+
+Benefits:
+
+Backend expertise
+Data organization skills
+Job-ready knowledge
+
+Schedule:
+
+Duration: 6 weeks
+Days: Mon–Thu
+Time: 09:00 – 12:00
+
+Learn More:
+
+https://example.com/databases
+
+
+9. IT Support & Networking
+
+
+Gain skills to manage IT systems and troubleshoot networks.
+
+Key Features:
+
+Hardware basics
+Network setup
+Troubleshooting
+
+Benefits:
+
+Entry-level IT jobs
+Practical knowledge
+Certification prep
+
+Schedule:
+
+Duration: 8 weeks
+Days: Mon–Fri
+Time: 08:00 – 12:00
+
+Learn More:
+
+https://example.com/it-support
+
+
+10. Entrepreneurship & Digital Skills
+
+
+Learn how to start and grow a digital business.
+
+Key Features:
+
+Business planning
+Digital marketing
+Branding
+
+Benefits:
+
+Startup skills
+Income opportunities
+Business growth
+
+Schedule:
+
+Duration: 5 weeks
+Days: Sat–Sun
+Time: 09:00 – 13:00
+
+Learn More:
+
+https://example.com/entrepreneurship

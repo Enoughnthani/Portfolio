@@ -1,0 +1,140 @@
+package app;
+
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+public class LoanRepaymentApp {
+
+    public static void main(String[] args) {
+        Scanner keyabord = new Scanner(System.in);
+
+        String[] clientNames = {"BOKANG", "MICHAL", "PETER", "HLOGI", "ANASHE", "ROBERT", "KAIZER", "DANIEL", "KAGISO", "SIMON", "STELLA"};
+
+        int[] loanMonths = new int[clientNames.length];
+        double[] loanAmounts = new double[clientNames.length];
+
+        double[] interestTotals = new double[clientNames.length];
+        double[] repaymentTotals = new double[clientNames.length];
+
+        boolean[] isEntered = new boolean[clientNames.length];
+
+        System.out.print("Enter client name or 999: ");
+        String inputName = keyabord.nextLine();
+
+        while (!inputName.equals("999")) {
+
+            int index = searchClient(clientNames, inputName);
+
+            if (index == -1) {
+                System.out.println("Client not found");
+            } else {
+
+                if (!isEntered[index]) {
+
+                    System.out.print("Enter loan greater or equal to 5000: ");
+                    double enteredLoan = keyabord.nextDouble();
+
+                    while (enteredLoan < 5000) {
+                        System.out.println("Invalid amount");
+                        System.out.print("Enter loan greater or equal to 5000: ");
+                        enteredLoan = keyabord.nextDouble();
+                    }
+
+                    System.out.print("Enter years: ");
+                    int enteredYears = keyabord.nextInt();
+                    keyabord.nextLine();
+
+                    int totalMonths = enteredYears * 12;
+
+                    loanAmounts[index] = enteredLoan;
+                    loanMonths[index] = totalMonths;
+                    isEntered[index] = true;
+
+                    calcLoan(index, loanMonths, loanAmounts, interestTotals, repaymentTotals);
+                }
+            }
+
+            System.out.print("Enter client name or 999: ");
+            inputName = keyabord.nextLine();
+        }
+
+        sortClients(clientNames, loanMonths, loanAmounts, interestTotals, repaymentTotals);
+        display(clientNames, loanMonths, loanAmounts, interestTotals, repaymentTotals);
+    }
+
+    public static int searchClient(String[] clients, String name) {
+        int x = -1;
+
+        for (int i = 0; i < clients.length; i++) {
+            if (clients[i].equalsIgnoreCase(name)) {
+                x = i;
+                break;
+            }
+        }
+        return x;
+    }
+
+    public static void calcLoan(int index, int[] months, double[] loans, double[] interestTotals, double[] repaymentTotals) {
+
+        double rate = 0.04;
+        double amount = loans[index];
+        int duration = months[index];
+
+        double interest = 0.0;
+        double balance = amount;
+
+        for (int i = 0; i < duration; i++) {
+            double monthlyInterest = balance * rate;
+            interest += monthlyInterest;
+            balance += monthlyInterest;
+        }
+
+        interestTotals[index] = interest;
+        repaymentTotals[index] = amount + interest;
+    }
+
+    public static void sortClients(String[] names, int[] months, double[] loans, double[] interests, double[] repayments) {
+
+        for (int i = 0; i < repayments.length - 1; i++) {
+            for (int j = i + 1; j < repayments.length; j++) {
+
+                if (repayments[i] < repayments[j]) {
+
+                    String tempName = names[i];
+                    names[i] = names[j];
+                    names[j] = tempName;
+
+                    int tempMonth = months[i];
+                    months[i] = months[j];
+                    months[j] = tempMonth;
+
+                    double tempLoan = loans[i];
+                    loans[i] = loans[j];
+                    loans[j] = tempLoan;
+
+                    double tempInterest = interests[i];
+                    interests[i] = interests[j];
+                    interests[j] = tempInterest;
+
+                    double tempRepayment = repayments[i];
+                    repayments[i] = repayments[j];
+                    repayments[j] = tempRepayment;
+                }
+            }
+        }
+    }
+
+    public static void display(String[] clients, int[] months, double[] loans, double[] interestTotals, double[] repaymentTotals) {
+
+        DecimalFormat format = new DecimalFormat("R0.00");
+        System.out.println("\nCLIENT\tMONTHS\tLOAN\tTOTAL INTEREST\tTOTAL REPAY");
+        System.out.println("=========\t========\t========\t=============\t============");
+
+        for (int i = 0; i < clients.length; i++) {
+            System.out.println(clients[i] + "\t" + months[i] + "\t"
+                    + format.format(loans[i]) + "\t"
+                    + format.format(interestTotals[i]) + "\t"
+                    + format.format(repaymentTotals[i]));
+        }
+    }
+}

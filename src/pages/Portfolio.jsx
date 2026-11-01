@@ -1,486 +1,278 @@
-import profile_pic from "../images/bg-image.png"
-import saps_img from "../images/saps_img.jpg"
-import danisile_glam_img from "../images/danisile_glam_img.png"
-import event_web_img from "../images/event-img.jpg"
-import student_card_web_img from "../images/student_card-web_img.png"
-import { motion } from "framer-motion";
-import laptop_repair_img from "../images/laptop_repair_img.jpg"
-import why_love_tech_img from "../images/why_love_tech_img.jpg"
-import assit_stud_img from "../images/assit_stud_img.jpg"
-
-import { Container, Row, Col, Card, Button, Modal, Form, Badge, Dropdown, DropdownButton, InputGroup } from "react-bootstrap";
+import { useEffect, useState } from 'react';
 import {
-  Mail,
-  Phone,
-  Briefcase,
-  GraduationCap,
-  Github,
-  Linkedin,
-  FileText,
-  PhoneCall,
-  ChevronRight,
   ArrowRight,
-  ArrowUp
-} from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaArrowRight, FaCalendarAlt, FaFacebook, FaLaptopCode, FaLinkedin, FaTools, FaTwitter, FaUserFriends, FaWhatsapp } from "react-icons/fa"
+  ArrowUp,
+  ArrowUpRight,
+  Briefcase,
+  CheckCircle2,
+  Code2,
+  Download,
+  ExternalLink,
+  FileText,
+  Github,
+  GraduationCap,
+  Mail,
+  MapPin,
+  Menu,
+  Phone,
+  X,
+} from 'lucide-react';
 
-export default function Portfolio() {
-  const [showContact, setShowContact] = useState(false);
-  const openContact = () => setShowContact(true);
-  const closeContact = () => setShowContact(false);
-  const [validated, setValidated] = useState(false)
-  const [showScrollUpButton, setShowScrollUpButton] = useState(false)
-  const naviaget = useNavigate()
+import profilePic from '../images/bg-image.png';
+import btsdLmsImage from '../images/btsd-lms.png';
+import btsdWebsiteImage from '../images/btsd-main-website.png';
+import sapsImage from '../images/saps_img.jpg';
+import glamImage from '../images/danisile_glam_img.png';
+import eventImage from '../images/event-img.jpg';
+import studentCardImage from '../images/student_card-web_img.png';
 
-  const profile = {
-    fullName: "Enough Tonny Nthani",
-    title: "Computer Science Graduate | Junior Java Developer",
-    location: "Tshwane, South Africa",
-    university: "Tshwane University of Technology",
-    highschool: "Ncakini Secondary School",
-    highschool_completed_year: "2019",
-    university_completed_year: "2024",
-    age: 25,
-    phone: "+27 63 748 9367",
-    email: "enoughnthani@gmail.com",
-    github: "https://github.com/Enoughnthani",
-    linkedin: "https://linkedin.com/in/yourprofile",
-    shortBio:
-      "Computer Science diploma holder with solid Java knowledge, experience building web apps with React and backend services. Passionate about clean code, automation, and learning new technologies.",
-    heroTags: ["React", "Java", "Node.js", "SQL", "Python"],
-  };
+const profile = {
+  name: 'Enough Tonny Nthani',
+  title: 'Junior Full-Stack Developer',
+  location: 'Tshwane, South Africa',
+  email: 'enoughnthani@gmail.com',
+  phone: '+27 63 748 9367',
+  whatsapp: 'https://wa.me/27637489367',
+  github: 'https://github.com/Enoughnthani',
+  resume: 'https://enoughnthani.github.io/Portfolio/enough_nthani_resume.pdf',
+};
 
-  const projects = [
-    {
-      id: 1,
-      title: "SAPS Alert & Certify",
-      desc:
-        "Web app for online document certifying and crime reporting. React frontend, Node/Express API, PostgreSQL.",
-      tech: ["React", "Node", "Postgres"],
-      link: "#",
-      image: saps_img
-    },
-    {
-      id: 2,
-      title: "Danisile's Glam & Beauty",
-      desc:
-        "Small e-commerce site built with React Bootstrap and Flask backend to manage products and orders (no payments).",
-      tech: ["React", "Flask", "Bootstrap"],
-      link: "#",
-      image: danisile_glam_img
-    },
-    {
-      id: 3,
-      title: "Event Management System",
-      desc: "System for storing and managing meetings, notes and activities. Java backend, React frontend.",
-      tech: ["Java", "React", "MySQL"],
-      link: "#",
-      image: event_web_img
-    },
-    {
-      id: 4,
-      title: "CardSwiftPro",
-      desc: "A web-based platform for creating student cards online, designed to eliminate long queues and streamline the process.",
-      tech: ["Java", "HTML/CSS", "JavaScript", "Bootstrap", "MySQL"],
-      link: "#",
-      image: student_card_web_img
-    }
+const navigation = [
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+];
 
-  ];
+const featuredProjects = [
+  {
+    id: 'btsd-lms',
+    title: 'B&T Skills Development LMS',
+    eyebrow: 'Featured project · Full-stack application',
+    description:
+      'A learning management system for managing programmes, modules, lessons, assessments and learner progress. Built with separate workflows for learners, facilitators, assessors, moderators and administrators.',
+    highlights: [
+      'Role-based dashboards and JWT authentication',
+      'Assessment submissions, grading and moderation',
+      'Programme credits and learner completion tracking',
+    ],
+    technologies: ['React', 'Spring Boot', 'Java', 'MySQL', 'JWT'],
+    image: btsdLmsImage,
+    imageAlt: 'Screenshot of the B&T Skills Development LMS',
+  },
+  {
+    id: 'btsd-website',
+    title: 'B&T Skills Development Website',
+    eyebrow: 'Featured project · Company website',
+    description:
+      'A website presenting B&T Skills Development Trainings, its training services and ways for prospective clients and learners to get in touch.',
+    highlights: [
+      'Clear training and service information',
+      'Responsive pages for desktop and mobile',
+      'Easy access to company and contact details',
+    ],
+    technologies: ['Frontend Development', 'Responsive Design', 'UI/UX'],
+    image: btsdWebsiteImage,
+    imageAlt: 'Screenshot of the B&T Skills Development main website',
+  },
+];
 
-  useEffect(() => {
-    const handleScroll = () => {
+const otherProjects = [
+  {
+    title: 'SAPS Alert & Certify',
+    description: 'A web application concept for document certification requests and crime reporting.',
+    technologies: ['React', 'Node.js', 'Express', 'PostgreSQL'],
+    image: sapsImage,
+  },
+  {
+    title: "Danisile's Glam & Beauty",
+    description: 'An e-commerce site with product and order management, built without payment processing.',
+    technologies: ['React', 'Flask', 'Bootstrap'],
+    image: glamImage,
+  },
+  {
+    title: 'Event Management System',
+    description: 'A system for organising meetings, activities and notes with a Java backend.',
+    technologies: ['Java', 'React', 'MySQL'],
+    image: eventImage,
+  },
+  {
+    title: 'CardSwiftPro',
+    description: 'A platform for creating student cards online to reduce manual queues.',
+    technologies: ['Java', 'JavaScript', 'Bootstrap', 'MySQL'],
+    image: studentCardImage,
+  },
+];
 
-      if (window.scrollY > 300) {
-        setShowScrollUpButton(true)
-      } else {
-        setShowScrollUpButton(false)
-      }
+const skillGroups = [
+  { title: 'Frontend', items: ['React', 'JavaScript', 'HTML', 'CSS', 'Tailwind CSS', 'Bootstrap'] },
+  { title: 'Backend', items: ['Java', 'Spring Boot', 'Node.js', 'REST APIs', 'JWT', 'Python'] },
+  { title: 'Data & Tools', items: ['MySQL', 'PostgreSQL', 'Git', 'GitHub', 'Linux', 'Postman'] },
+  { title: 'Testing & IT', items: ['Manual QA Testing', 'Bug Reporting', 'API Testing', 'IT Support'] },
+];
 
-    }
+function SectionHeading({ eyebrow, title, description }) {
+  return (
+    <div className="mb-9 max-w-3xl">
+      <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-teal-700">{eyebrow}</p>
+      <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">{title}</h2>
+      {description && <p className="mt-4 text-base leading-7 text-slate-600">{description}</p>}
+    </div>
+  );
+}
 
-    window.addEventListener("scroll", handleScroll)
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Why I Love Building Web Apps",
-      date: "Sep 28, 2025",
-      excerpt:
-        "Thoughts on turning complex ideas into smooth, user-friendly interfaces with React and Tailwind.",
-      image: why_love_tech_img
-    },
-    {
-      id: 2,
-      title: "Laptop Repair Tips You Should Know",
-      date: "Sep 15, 2025",
-      excerpt:
-        "Simple steps to keep your laptop running longer and avoid common hardware problems.",
-      image: laptop_repair_img
-    },
-    {
-      id: 3,
-      title: "Helping Students Master Programming",
-      date: "Aug 30, 2025",
-      excerpt:
-        "How mentoring others has improved my own coding skills and kept me learning new concepts.",
-      image: assit_stud_img
-    },
-  ];
-
-  const skillChips = [
-    "Java", "React", "JavaScript", "HTML/CSS", "SQL", "Flask", "Python", "Git"
-  ];
-
-  const navItems = [
-    { link: "/Portfolio/", label: "Home" },
-    { link: "#About_Me", label: "About" },
-    { link: "#Projects", label: "Projects" },
-    { link: "#Blog", label: "Blog" },
-  ]
-
-  const social_media = [
-    { icon: FaFacebook,hover_color:"hover:!text-blue-600 hover:bg-slate-100", link: "https://web.facebook.com/EnoughTonnyNthani" },
-    { icon: FaWhatsapp,hover_color:"hover:!text-green-600 hover:bg-slate-100", link: "https://wa.me/27637489367" },
-    { icon: FaLinkedin,hover_color:"hover:!text-sky-700 hover:bg-slate-100", link: "https://za.linkedin.com/" },
-    { icon: FaTwitter,hover_color:"hover:!text-slate-600 hover:bg-slate-100", link: "https://x.com/?lang=en" }
-  ]
-
-  const handleSubmit = (e) => {
-
-    e.preventDefault()
-
-    const target = e.currentTarget
-    if (target.checkValidity) {
-      setValidated(true)
-      e.stopPropagation()
-    }
-
-  }
+function ProjectLinks({ project }) {
+  if (!project.liveUrl && !project.sourceUrl) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-slate-50 to-white">
+    <div className="flex flex-wrap gap-4 pt-3">
+      {project.liveUrl && (
+        <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-bold text-teal-800 hover:underline">
+          Live website <ArrowUpRight size={16} />
+        </a>
+      )}
+      {project.sourceUrl && (
+        <a href={project.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 hover:underline">
+          Source code <Github size={16} />
+        </a>
+      )}
+    </div>
+  );
+}
 
-      <header className="flex items-center py-2 px-3 border-b z-50 bg-gradient-to-r from-slate-50 to-white fixed left-0 right-0">
+export default function Portfolio() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
-        <div onClick={() => location.href = "/Portfolio/"} className="hover:border px-2 rounded flex items-center cursor-pointer">
-          <div className="flex items-center justify-center text-white font-bold bg-gray-600 rounded-3xl w-[40px] h-[40px]">
-            ET
+  useEffect(() => {
+    const onScroll = () => setShowBackToTop(window.scrollY > 400);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 antialiased">
+      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 sm:px-8">
+          <a href="#home" onClick={() => setMenuOpen(false)} className="inline-flex items-center gap-3 no-underline">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 text-sm font-extrabold text-white">EN</span>
+            <span className="font-extrabold tracking-tight text-slate-950">Enough Nthani<span className="text-teal-600">.</span></span>
+          </a>
+
+          <nav aria-label="Main navigation" className="hidden items-center gap-7 md:flex">
+            {navigation.map(({ label, href }) => (
+              <a key={href} href={href} className="text-sm font-semibold text-slate-600 no-underline transition hover:text-teal-700">{label}</a>
+            ))}
+          </nav>
+
+          <div className="hidden items-center gap-3 md:flex">
+            <a href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 hover:text-slate-950"><Github size={21} /></a>
+            <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-bold text-white no-underline transition hover:bg-teal-800">Get in touch <ArrowUpRight size={16} /></a>
           </div>
-          <div>
-            <h4 className="m-0 ps-2 font-extrabold uppercase tracking-tight text-slate-900">Nthani</h4>
-          </div>
+          <button type="button" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} className="rounded-lg border border-slate-200 p-2 text-slate-800 md:hidden">
+            {menuOpen ? <X size={21} /> : <Menu size={21} />}
+          </button>
         </div>
-
-        <nav className="flex ms-auto items-center justify-end">
-          {navItems.map((p, key) => (
-            <a as="a" href={p.link} className="hidden sm:block border-2 font-bold hover:underline text-gray-600 rounded px-4 py-1  flex items-center justify-center mx-2 no-underline border-slate-200" key={key}>
-              {p.label}
-            </a>
-          ))}
-
-          <Dropdown className="block sm:hidden">
-            <DropdownButton variant="outline-secondary" title="Menu" >
-              {navItems.map((p, key) => (
-                <a as="a" href={p.link} className="border-2 my-2  font-bold hover:underline text-gray-600 rounded px-4 py-1  flex items-center justify-center mx-2 no-underline border-slate-200" key={key}>
-                  {p.label}
-                </a>
-              ))}
-            </DropdownButton>
-          </Dropdown>
-        </nav>
+        {menuOpen && (
+          <nav aria-label="Mobile navigation" className="border-t border-slate-200 bg-white px-5 py-3 md:hidden">
+            {navigation.map(({ label, href }) => (
+              <a key={href} href={href} onClick={() => setMenuOpen(false)} className="block rounded-lg px-3 py-3 text-sm font-semibold text-slate-700 no-underline hover:bg-slate-100">{label}</a>
+            ))}
+          </nav>
+        )}
       </header>
 
-      <Container fluid className="py-8">
-
-        {/* HERO */}
-        <section className="from-slate-50 to-white rounded p-6 mt-8 mb-8 bg-gradient-to-r">
-          <Row className="animate-popup items-center space-y-9 py-9 gy-8">
-            <Col md={5} className="text-center md:text-left">
-              <div className="flex relative items-center justify-center">
-                <img
-                  src={profile_pic}
-                  alt="profile"
-                  className="object-contain  shadow-md bg-gradient-to-r from-slate-100 to-white rounded"
-                />
-
-                <div className="flex gap-3 rounded absolute -bottom-4 px-4 py-1 bg-slate-900">
-                  {social_media.map(social => (
-                    <a href={social.link} target="_blank">
-                      <social.icon size={35} className={`${social.hover_color} rounded-md text-white cursor-pointer`} />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </Col>
-
-            <Col md={7} className="flex flex-col justify-center">
-              <div className="flex flex-column items-center md:items-start">
-                <h1 className="tracking-tight text-center !text-6xl lg:!text-7xl font-extrabold">
-                  {profile.fullName}
-                </h1>
-
-                <div>
-                  <p className="text-slate-600 mt-1 font-medium">{profile.title}</p>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-3 mt-4">
-                {profile.heroTags.map((t) => (
-                  <span
-                    key={t}
-                    className="text-sm px-3  py-1 rounded-full bg-gray-600 border border-gray-600 text-white font-medium"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-5 flex flex-wrap items-center gap-3">
-                <motion.button
-                  onClick={openContact}
-                  className="!flex items-center !font-bold bg-gray-600 px-4 py-2 rounded !text-xl text-white"
-                  initial={{ scale: 0.8 }}
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ type: "spring", stiffness: 150 }}
-                >
-                  <Mail size={16} className="me-2" /> Contact
-                </motion.button>
-
-
-                <a
-                  href={profile.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex text-gray-600 items-center gap-2 text-sm font-medium"
-                >
-                  <Github size={18} /> GitHub
-                </a>
-
-                <a
-                  href={profile.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex text-gray-600 items-center gap-2 text-sm font-medium"
-                >
-                  <Linkedin size={18} /> LinkedIn
-                </a>
-
-                <a
-                  href="https://enoughnthani.github.io/Portfolio/enough_nthani_resume.pdf"
-                  download
-                  className="inline-flex text-gray-600 items-center gap-2 text-sm font-medium"
-                >
-                  <FileText size={18} /> Resume
-                </a>
-              </div>
-
-              <div className="mt-6 text-slate-700">
-                <p className="max-w-2xl">{profile.shortBio}</p>
-              </div>
-            </Col>
-          </Row>
-        </section>
-
-        <section id="About_Me" className="fadeSection relative bg-gradient-to-r from-slate-50 to-white py-20 px-6 flex justify-center">
-          <div className="absolute"></div>
-
-          <div className="relative max-w-5xl w-full text-center text-white space-y-10">
-            <h2 className="text-5xl text-slate-900 font-extrabold tracking-tight drop-shadow-md">
-              About Me
-            </h2>
-
-            <p className="text-lg text-slate-900 sm:text-xl leading-relaxed max-w-3xl mx-auto">
-              I’m <span className="font-semibold">Enough Tonny Nthani</span>, a
-              passionate developer who loves crafting clean, interactive web
-              experiences and exploring new technologies. My goal is to build tools
-              that make everyday life simpler and more enjoyable.
-            </p>
-
-            {/* Icon Feature Grid */}
-            <div className="grid md:grid-cols-3 gap-8 mt-12">
-              {/* Coding */}
-              <div className="bg-gray-600 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-                <FaLaptopCode className="text-5xl mx-auto mb-4 text-yellow-300 drop-shadow" />
-                <h3 className="text-2xl font-semibold mb-2">Web Development</h3>
-                <p className="text-base">
-                  Creating responsive, user-friendly websites and apps with React,
-                  Tailwind and modern backend stacks.
-                </p>
-              </div>
-
-              {/* Hardware Repair */}
-              <div className="bg-gray-600 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-                <FaTools className="text-5xl mx-auto mb-4 text-green-300 drop-shadow" />
-                <h3 className="text-2xl font-semibold mb-2">Hardware Solutions</h3>
-                <p className="text-base">
-                  Fixing and upgrading laptops & desktops, diagnosing hardware
-                  issues, and keeping systems running smoothly.
-                </p>
-              </div>
-
-              {/* Mentoring */}
-              <div className="bg-gray-600 rounded-2xl p-8 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-                <FaUserFriends className="text-5xl mx-auto mb-4 text-pink-300 drop-shadow" />
-                <h3 className="text-2xl font-semibold mb-2">Programming Support</h3>
-                <p className="text-base">
-                  Helping students understand programming concepts and guiding them
-                  through projects and challenges.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-gradient-to-r from-slate-50 to-white rounded-2xl p-6 mb-8">
-          <div>
-            <div className="flex items-start gap-4 mb-6">
-
-              <div className="flex-1">
-                <div className="flex gap-x-2">
-                  <GraduationCap size={24} className="text-indigo-500 mt-1" />
-                  <h5 className="mb-3 text-5xl font-extrabold text-slate-800">Education</h5>
-                </div>
-
-                <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-                  <small className="text-slate-600 font-bold">{profile.highschool}</small>
-                  <Badge bg="secondary" className="justify-self-end">
-                    {profile.highschool_completed_year}
-                  </Badge>
-
-                  <small className="text-slate-600 font-bold">{profile.university}</small>
-                  <Badge bg="primary" className="justify-self-end">
-                    {profile.university_completed_year}
-                  </Badge>
-                </div>
-              </div>
-            </div>
-
-
-            <hr className="my-3" />
-
-            <div className="mb-3 space-y-6">
-              <h6 className="mb-2 text-xl font-extrabold">Quick Info</h6>
-              <ul className="text-sm text-slate-600 space-y-1">
-                <li className="flex items-center gap-2 font-bold"><Phone size={14} /> {profile.phone}</li>
-                <li className="flex items-center gap-2 font-bold"><Mail size={14} /> {profile.email}</li>
-                <li className="flex items-center gap-2 font-bold"><Briefcase size={14} /> {profile.title}</li>
-              </ul>
-            </div>
-
+      <main id="home">
+        <section className="overflow-hidden bg-slate-950 text-white">
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 md:grid-cols-[1.2fr_0.8fr] md:py-24">
             <div>
-              <h6 className="mb-2">Skills</h6>
-              <div className="flex flex-wrap gap-2">
-                {skillChips.map((s) => (
-                  <span
-                    key={s}
-                    className="text-xs px-3 py-1 rounded-full bg-slate-100 border border-slate-200"
-                  >
-                    {s}
-                  </span>
-                ))}
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-300/30 bg-teal-400/10 px-4 py-2 text-xs font-bold text-teal-200">
+                <span className="h-2 w-2 rounded-full bg-teal-300" /> Open to junior developer opportunities
+              </div>
+              <p className="mb-4 text-sm font-bold uppercase tracking-[0.2em] text-teal-300">Hello, I'm Enough</p>
+              <h1 className="max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+                I build useful software from <span className="text-teal-300">frontend to backend.</span>
+              </h1>
+              <p className="mt-7 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+                Computer Science graduate and junior full-stack developer working with React, Java, Spring Boot and databases. I enjoy creating practical applications and testing them carefully.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#projects" className="inline-flex items-center gap-2 rounded-xl bg-teal-400 px-5 py-3 text-sm font-extrabold text-slate-950 no-underline transition hover:bg-teal-300">Explore my work <ArrowRight size={18} /></a>
+                <a href={profile.resume} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-slate-600 px-5 py-3 text-sm font-bold text-white no-underline transition hover:border-teal-300">View my CV <Download size={17} /></a>
+              </div>
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-300">
+                <span className="inline-flex items-center gap-2"><MapPin size={16} className="text-teal-300" /> {profile.location}</span>
+                <span className="inline-flex items-center gap-2"><Code2 size={16} className="text-teal-300" /> {profile.title}</span>
               </div>
             </div>
-
-          </div>
-        </section>
-
-
-        <section id="Projects" className="bg-gradient-to-l from-slate-50 to-white space-y-6 py-6">
-          <div className="mb-3 px-3">
-
-            <div className="max-w-2xl mx-auto text-center px-4 py-8">
-              <h4 className="text-5xl font-bold tracking-tight text-gray-700 mb-4">
-                Projects
-              </h4>
-              <p className="text-gray-600 leading-relaxed">
-                Here are some of my recent projects, highlighting my skills in design and development. Each one reflects my focus on clean, functional, and user-friendly solutions.
-              </p>
-            </div>
-          </div>
-
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {projects.map((p, i) => (
-              <div key={i} className="flex flex-column items-center justify-center">
-
-                <img src={p.image} className="w-full h-48 object-cover" />
-
-                <div
-                  className="flex flex-column flex-1 relative p-6 text-left space-y-4 bg-white rounded-b-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                >
-                  <h4 className="text-gray-600 tracking-tight font-extrabold">{p.title}</h4>
-                  <p className="text-gray-600">{p.desc}</p>
-
-                  <div className="mt-auto pt-3">
-                    <Button variant="outline-secondary">
-                      View Sorce Code
-                    </Button>
+            <div className="mx-auto w-full max-w-sm">
+              <div className="relative rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-800 to-slate-900 p-4 shadow-2xl shadow-black/30">
+                <div className="overflow-hidden rounded-[1.5rem] bg-slate-800">
+                  <img src={profilePic} alt="Profile artwork" className="aspect-square h-full w-full object-contain" />
+                </div>
+                <div className="mt-4 flex items-center justify-between gap-3 rounded-xl bg-white/10 px-4 py-3">
+                  <div>
+                    <p className="text-sm font-bold text-white">Enough Tonny Nthani</p>
+                    <p className="text-xs text-slate-300">React · Java · Spring Boot</p>
                   </div>
+                  <CheckCircle2 size={22} className="text-teal-300" />
                 </div>
               </div>
-            ))}
-          </div>
-
-
-          <div>
-            <Button className="!flex bg-white mx-auto text-black !font-bold !border-gray-600">
-              More Projects
-              <ArrowRight className="ms-2 hover:animate-arrow_rotate" />
-            </Button>
+            </div>
           </div>
         </section>
 
-        <section
-          id="Blog"
-          className="relative bg-gray-50 py-20 px-6 flex justify-center"
-        >
-          <div className="max-w-6xl w-full text-center space-y-12">
-            <h2 className="text-5xl font-extrabold text-gray-800 tracking-tight">
-              Blog
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Insights, tips, and stories from my journey in software development,
-              hardware repair, and mentoring.
-            </p>
+        <section id="about" className="scroll-mt-28 border-b border-slate-200 bg-white py-20">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
+            <SectionHeading eyebrow="About me" title="Building, learning and solving real problems." />
+            <div className="space-y-5 text-base leading-8 text-slate-600">
+              <p>I hold a Diploma in Computer Science from Tshwane University of Technology. My focus is full-stack web development, especially applications that help people work and learn more effectively.</p>
+              <p>My recent work includes a multi-role learning management system, a training company website and software quality assurance. I work with APIs, authentication, SQL databases and responsive interfaces.</p>
+              <p>I also have experience troubleshooting IT systems and testing software workflows. I value readable code, clear user experiences and steady improvement.</p>
+              <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 text-sm font-bold text-teal-800 no-underline hover:underline">Let's work together <ArrowUpRight size={17} /></a>
+            </div>
+          </div>
+        </section>
 
-            {/* Grid of posts */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {blogPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                >
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-6 text-left space-y-4">
-                    <div className="flex items-center text-sm text-gray-500 space-x-2">
-                      <FaCalendarAlt className="text-indigo-500" />
-                      <span>{post.date}</span>
+        <section id="projects" className="scroll-mt-28 py-20">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <SectionHeading eyebrow="Selected work" title="Projects I've worked on" description="These projects show how I combine frontend development, backend logic, databases and practical problem-solving." />
+            <div className="grid gap-7 lg:grid-cols-2">
+              {featuredProjects.map((project) => (
+                <article key={project.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+                  <div className="border-b border-slate-100 bg-slate-100 p-3">
+                    <img src={project.image} alt={project.imageAlt} loading="lazy" className="h-60 w-full rounded-xl bg-white object-contain sm:h-72" />
+                  </div>
+                  <div className="p-6 sm:p-8">
+                    <p className="mb-3 text-xs font-bold uppercase tracking-wider text-teal-700">{project.eyebrow}</p>
+                    <h3 className="text-2xl font-extrabold tracking-tight text-slate-950">{project.title}</h3>
+                    <p className="mt-3 leading-7 text-slate-600">{project.description}</p>
+                    <ul className="mt-5 space-y-2">
+                      {project.highlights.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-sm text-slate-700"><CheckCircle2 size={16} className="mt-0.5 shrink-0 text-teal-600" /> {item}</li>
+                      ))}
+                    </ul>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => <span key={tech} className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-700">{tech}</span>)}
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-800">
-                      {post.title}
-                    </h3>
-                    <p className="text-gray-600">{post.excerpt}</p>
-                    <a
-                      href="#"
-                      className="inline-flex items-center text-indigo-600 font-semibold hover:underline mt-2"
-                    >
-                      Read More
-                      <FaArrowRight className="ml-2" />
-                    </a>
+                    <ProjectLinks project={project} />
+                  </div>
+                </article>
+              ))}
+            </div>
+            <h3 className="mt-16 mb-6 text-2xl font-extrabold text-slate-950">More projects</h3>
+            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+              {otherProjects.map((project) => (
+                <article key={project.title} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                  <img src={project.image} alt={`Screenshot of ${project.title}`} loading="lazy" className="h-44 w-full bg-slate-100 object-cover" />
+                  <div className="p-5">
+                    <h4 className="text-lg font-bold leading-6 text-slate-950">{project.title}</h4>
+                    <p className="mt-3 text-sm leading-6 text-slate-600">{project.description}</p>
+                    <div className="mt-5 flex flex-wrap gap-1.5">
+                      {project.technologies.map((tech) => <span key={tech} className="rounded-md bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-600">{tech}</span>)}
+                    </div>
                   </div>
                 </article>
               ))}
@@ -488,173 +280,82 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section className="my-8 rounded-md border border-gray-200 overflow-hidden">
-          <Row className="h-full">
-            {/* Left Column */}
-            <Col
-              md={5}
-              className="flex items-center justify-center bg-gradient-to-b from-purple-800 to-purple-900 p-6 text-white"
-            >
-              <div className="space-y-6 text-center">
-                <h4 className="text-2xl font-bold tracking-wide">Contact Information</h4>
-                <p className="text-sm font-medium opacity-90">
-                  Do you have a project in mind that you think I would be a good fit for?
-                  Let’s talk!
-                </p>
-
-                <div className="mt-6 space-y-3">
-                  <div className="flex items-center justify-center gap-3">
-                    <PhoneCall className="h-5 w-5" />
-                    <span className="text-base">+27 63 748 9367</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3">
-                    <Mail className="h-5 w-5" />
-                    <span className="text-base">enoughnthani@gmail.com</span>
-                  </div>
-                </div>
+        <section id="experience" className="scroll-mt-28 bg-white py-20">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <SectionHeading eyebrow="Experience & education" title="My background" description="Technical work, practical testing and formal study all contribute to how I approach software projects." />
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="rounded-2xl border border-slate-200 p-7">
+                <div className="mb-4 inline-flex rounded-xl bg-teal-50 p-3 text-teal-800"><Briefcase size={24} /></div>
+                <p className="text-xs font-bold uppercase tracking-wide text-teal-700">July 2026 onward · Internship</p>
+                <h3 className="mt-2 text-xl font-bold text-slate-950">Software Testing & QA</h3>
+                <p className="mt-1 font-semibold text-slate-600">Success By Design</p>
+                <p className="mt-4 text-sm leading-7 text-slate-600">Tested business software and CRM features, checked workflows and integrations, reported defects and verified fixes. Projects included CRM modules, accounting integration and franchise operations.</p>
               </div>
-            </Col>
-
-            {/* Right Column – Form */}
-            <Col md={7} className="flex items-center justify-center bg-white p-8">
-              <div className="w-full max-w-xl">
-                <Form
-                  noValidate
-                  validated={validated}
-                  onSubmit={handleSubmit}
-                  className="space-y-6"
-                >
-
-                  <div className="grid grid-cols-2 gap-3">
-
-                    <Form.Label className="min-w-[100px] text-gray-700 font-semibold">
-                      First Name
-                    </Form.Label>
-                    <Form.Control required className="rounded-md border-gray-300" />
-
-                    <Form.Label className="min-w-[100px] text-gray-700 font-semibold">
-                      Last Name
-                    </Form.Label>
-                    <Form.Control required className="rounded-md border-gray-300" />
-
-                    <Form.Label className="min-w-[120px] text-gray-700 font-semibold">
-                      Email
-                    </Form.Label>
-                    <InputGroup>
-                      <Form.Control
-                        required
-                        type="email"
-                        className="rounded-l-md border-gray-300"
-                      />
-                      <InputGroup.Text className="bg-white">
-                        <Mail className="h-4 w-4 text-gray-600" />
-                      </InputGroup.Text>
-                    </InputGroup>
-                  </div>
-
-                  <Row>
-                    <Col>
-                      <Form.Label className="font-semibold text-gray-700">
-                        What are you interested in?
-                      </Form.Label>
-                      <div className="flex flex-wrap gap-4 mt-2">
-                        {["Mobile App", "Design", "Desktop App", "Software App"].map(
-                          (value, idx) => (
-                            <Form.Check
-                              key={idx}
-                              required
-                              id={idx + 1}
-                              name="interest"
-                              type="radio"
-                              label={value}
-                              className="text-gray-700 cursor-pointer"
-                            />
-                          )
-                        )}
-                      </div>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col>
-                      <Form.Label className="font-semibold text-gray-700">
-                        Your Message
-                      </Form.Label>
-                      <Form.Control
-                        required
-                        as="textarea"
-                        rows={4}
-                        className="rounded-md border-gray-300"
-                      />
-                    </Col>
-                  </Row>
-
-                  <div className="flex justify-end">
-                    <Button
-                      type="submit"
-                      variant="success"
-                      className="!flex items-center gap-2 px-6 py-2 text-white rounded-md shadow-sm hover:shadow-md transition"
-                    >
-                      Send Message
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </Form>
+              <div className="rounded-2xl border border-slate-200 p-7">
+                <div className="mb-4 inline-flex rounded-xl bg-teal-50 p-3 text-teal-800"><GraduationCap size={24} /></div>
+                <p className="text-xs font-bold uppercase tracking-wide text-teal-700">Computer Science · Diploma</p>
+                <h3 className="mt-2 text-xl font-bold text-slate-950">Tshwane University of Technology</h3>
+                <p className="mt-1 font-semibold text-slate-600">Diploma in Computer Science</p>
+                <p className="mt-4 text-sm leading-7 text-slate-600">Built a foundation in programming, databases, software development and problem-solving through academic and practical projects.</p>
               </div>
-            </Col>
-          </Row>
+            </div>
+            <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+              <h3 className="flex items-center gap-2 font-bold text-slate-950"><FileText size={20} className="text-teal-700" /> Additional training</h3>
+              <p className="mt-3 text-sm leading-7 text-slate-600">System Development Level 4 learnership (Dynamic DNA) · Data Science training (Netcampus) · Microsoft Azure data and AI fundamentals training</p>
+            </div>
+          </div>
         </section>
 
+        <section id="skills" className="scroll-mt-28 py-20">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <SectionHeading eyebrow="Technical skills" title="Tools and technologies" description="I use these technologies in development projects, technical training and software testing." />
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {skillGroups.map((group) => (
+                <div key={group.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 className="mb-5 text-lg font-bold text-slate-950">{group.title}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((item) => <span key={item} className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700">{item}</span>)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
+        <section id="contact" className="scroll-mt-28 bg-slate-950 py-20 text-white">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+            <div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-teal-300">Contact</p>
+              <h2 className="max-w-lg text-3xl font-extrabold tracking-tight sm:text-4xl">Have a project or opportunity in mind?</h2>
+              <p className="mt-5 max-w-lg leading-7 text-slate-300">I'm interested in junior software development, full-stack development and software testing opportunities. Send me a message and let's talk.</p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <a href={`mailto:${profile.email}?subject=Portfolio%20enquiry`} className="inline-flex items-center gap-2 rounded-xl bg-teal-400 px-5 py-3 text-sm font-extrabold text-slate-950 no-underline hover:bg-teal-300"><Mail size={18} /> Email me</a>
+                <a href={profile.whatsapp} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-slate-600 px-5 py-3 text-sm font-bold text-white no-underline hover:border-teal-300"><Phone size={17} /> WhatsApp</a>
+              </div>
+            </div>
+            <div className="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-7 sm:p-9">
+              <div className="flex items-start gap-3"><Mail className="mt-1 text-teal-300" size={20} /><div><p className="text-xs uppercase tracking-wide text-slate-400">Email</p><a href={`mailto:${profile.email}`} className="mt-1 block break-all font-semibold text-white no-underline hover:text-teal-300">{profile.email}</a></div></div>
+              <div className="border-t border-white/10" />
+              <div className="flex items-start gap-3"><Phone className="mt-1 text-teal-300" size={20} /><div><p className="text-xs uppercase tracking-wide text-slate-400">Phone</p><a href="tel:+27637489367" className="mt-1 block font-semibold text-white no-underline hover:text-teal-300">{profile.phone}</a></div></div>
+              <div className="border-t border-white/10" />
+              <div className="flex items-start gap-3"><Github className="mt-1 text-teal-300" size={20} /><div><p className="text-xs uppercase tracking-wide text-slate-400">GitHub</p><a href={profile.github} target="_blank" rel="noreferrer" className="mt-1 inline-flex items-center gap-1 font-semibold text-white no-underline hover:text-teal-300">github.com/Enoughnthani <ExternalLink size={14} /></a></div></div>
+            </div>
+          </div>
+        </section>
+      </main>
 
-      </Container>
-
-      {showScrollUpButton && (
-        <ArrowUp onClick={scrollToTop} className="fixed right-5 bottom-2 text-gray-600 border-1 !border-slate-300 rounded cursor-pointer" size={40} />
-      )}
-
-      {/* FOOTER */}
-      <footer className="mt-10 text-center bg-slate-700 text-slate-200 py-6">
-        <div className="flex items-center justify-center gap-4">
-          <a href={`tel:${profile.phone}`} className="inline-flex items-center gap-2">
-            <Phone size={16} /> {profile.phone}
-          </a>
-          <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2">
-            <Mail size={16} /> {profile.email}
-          </a>
+      <footer className="border-t border-slate-800 bg-slate-950 py-7 text-slate-400">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 text-sm sm:px-8">
+          <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
+          <p>Built with React and Tailwind CSS.</p>
         </div>
-        <div className="mt-3 text-sm">© {new Date().getFullYear()} {profile.fullName} — Built with React, Tailwind & React-Bootstrap</div>
       </footer>
 
-      {/* CONTACT MODAL */}
-      <Modal show={showContact} onHide={closeContact} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Contact {profile.fullName}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="formName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control type="text" placeholder="Your name" />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" placeholder="you@domain.com" />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formMessage">
-              <Form.Label>Message</Form.Label>
-              <Form.Control as="textarea" rows={3} placeholder="Short message" />
-            </Form.Group>
-
-            <div className="text-end">
-              <Button variant="secondary" className="me-2" onClick={closeContact}>Cancel</Button>
-              <Button variant="primary" onClick={closeContact}>Send</Button>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
+      {showBackToTop && (
+        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Back to top" className="fixed bottom-6 right-6 z-40 rounded-full bg-teal-500 p-3 text-slate-950 shadow-xl transition hover:bg-teal-300">
+          <ArrowUp size={21} />
+        </button>
+      )}
     </div>
   );
 }
